@@ -6,7 +6,7 @@ using System.Security.Claims;
 using TryBets.Repository;
 using TryBets.DTO;
 
-
+//
 namespace TryBets.Controllers;
 
 [Route("[controller]")]
@@ -23,7 +23,7 @@ public class BetController : Controller
     [Authorize(Policy = "Client")]
     public IActionResult Post([FromBody] BetDTORequest request)
     {
-        try 
+        try
         {
             var token = HttpContext.User.Identity as ClaimsIdentity;
             var email = token?.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Email)?.Value;
@@ -31,7 +31,7 @@ public class BetController : Controller
         }
         catch (Exception ex)
         {
-            return BadRequest(new {message = ex.Message});
+            return BadRequest(new { message = ex.Message });
         }
     }
 
@@ -40,7 +40,7 @@ public class BetController : Controller
     [Authorize(Policy = "Client")]
     public IActionResult Get(int BetId)
     {
-        try 
+        try
         {
             var token = HttpContext.User.Identity as ClaimsIdentity;
             var email = token?.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Email)?.Value;
