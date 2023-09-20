@@ -31,9 +31,8 @@ public class BetController : Controller
             var token = HttpContext.User.Identity as ClaimsIdentity;
             var email = token?.Claims.FirstOrDefault(e => e.Type == ClaimTypes.Email)?.Value;
             await _oddService.UpdateOdd(request.MatchId, request.TeamId, request.BetValue);
-            var response = _repository.Post(request, email!);
 
-            return StatusCode(201, response);
+            return Created("", _repository.Post(request, email!));
         }
         catch (Exception err)
         {
@@ -51,7 +50,7 @@ public class BetController : Controller
         {
             var token = HttpContext.User.Identity as ClaimsIdentity;
             var email = token?.Claims.FirstOrDefault(e => e.Type == ClaimTypes.Email)?.Value;
-            return Created("", _repository.Get(BetId, email!));
+            return Ok(_repository.Get(BetId, email!));
         }
         catch (Exception err)
         {
