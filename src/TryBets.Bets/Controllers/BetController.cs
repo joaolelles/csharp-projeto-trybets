@@ -29,13 +29,13 @@ public class BetController : Controller
         try
         {
             var token = HttpContext.User.Identity as ClaimsIdentity;
-            var email = token?.Claims.FirstOrDefault(email => email.Type == ClaimTypes.Email)?.Value;
+            var email = token?.Claims.FirstOrDefault(e => e.Type == ClaimTypes.Email)?.Value;
             return Created("", _repository.Post(request, email!));
         }
-        catch (Exception error)
+        catch (Exception err)
         {
 
-            return BadRequest(new { message = error.Message });
+            return BadRequest(new { message = err.Message });
         }
     }
 
@@ -47,13 +47,13 @@ public class BetController : Controller
         try
         {
             var token = HttpContext.User.Identity as ClaimsIdentity;
-            var email = token?.Claims.FirstOrDefault(email => email.Type == ClaimTypes.Email)?.Value;
+            var email = token?.Claims.FirstOrDefault(e => e.Type == ClaimTypes.Email)?.Value;
             return Created("", _repository.Get(BetId, email!));
         }
-        catch (Exception error)
+        catch (Exception err)
         {
 
-            return BadRequest(new { message = error.Message });
+            return BadRequest(new { message = err.Message });
         }
     }
 }
