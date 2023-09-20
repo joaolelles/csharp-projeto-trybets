@@ -12,7 +12,7 @@ public class BetRepository : IBetRepository
     {
         _context = context;
     }
-
+    //
     public BetDTOResponse Post(BetDTORequest betRequest, string email)
     {
         User betUser = _context.Users.FirstOrDefault(u => u.Email == email)!;
